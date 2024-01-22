@@ -1,0 +1,39 @@
+<div class="flex flex-col p-4 space-y-10 h-screen justify-center"> 
+    <h2 class="text-4xl font-bold text-slate-700">Welcome back! <br> Login to your account</h2>
+    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm"  class="max-w-screen-sm p-2 flex flex-col space-y-4">
+        <!-- EMAIL INPUT -->
+        <label for="loginEmail">
+            <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                Email
+            </span>
+        </label>
+        
+        <span class="text-red-500 font-semibold" *ngIf="loginEmail.invalid && (loginEmail.touched || loginEmail.dirty)">
+            <div *ngIf="loginEmail.errors?.['required']">email is required.</div>
+            <div *ngIf="loginEmail.errors?.['pattern']">must be a valid email.</div>
+        </span>
+        <input type="email" name="loginEmail" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="you@example.com" 
+        formControlName="loginEmail"/>
+        <label for="loginPassword" class="block w-1/2">
+            <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                Password
+            </span>
+        </label>
+        <!-- PASSWORD INPUT -->
+        <span class="text-red-500 font-semibold" *ngIf="loginPassword.invalid && (loginPassword.touched || loginPassword.dirty)">
+            <div *ngIf="loginPassword.errors?.['required']">password is required.</div>
+            <div *ngIf="loginPassword.errors?.['minlength']">The password must have at least 6 characters.</div>
+        </span>
+        <input  type="password" name="loginPassword" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 block w-full rounded-md sm:text-sm focus:ring-1" placeholder="password" 
+        formControlName="loginPassword"
+        required
+        minlength="6"/>
+
+        <!-- SUBMIT BUTTON -->
+        <button class="disabled:bg-slate-400 disabled:opacity-75 disabled:hover:bg-slate-400 bg-teal-700 hover:bg-teal-800  py-2 rounded-full text-white font-semibold text-xl "
+        type="submit"
+        [disabled]="loginForm.invalid">Sign in</button>
+    </form>
+
+    <a class="text-center font-bold text-teal-600 border-t-4 border-teal-600 py-10 mx-2" href="">Forgot your password?</a>
+</div>
