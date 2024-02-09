@@ -1,0 +1,45 @@
+@switch (userType) {
+    @case ('personal') {
+        <form (submit)="onSubmit($event)" [formGroup]="personalForm" class="w-full flex flex-col p-2 text-slate-700">
+            <!-- NAME INPUT -->
+            <label for="nombre">Nombre:</label>
+            <input formControlName="nombre" class="border-b-teal-500" type="text" name="nombre" id="">
+            <!-- LASTNAME INPUT -->
+            <label for="apellido">Apellido:</label>
+            <input formControlName="apellido" name="apellido" id="">
+            <!-- CEDULA INPUT -->
+            <label for="cedula" >Cedula:</label>
+            <div>
+                <select formControlName="cedula_tipo" name="cedula_tipo" id="">
+                    @for (item of selectTypes; track selectTypes) {
+                        <option [ngValue]="item">{{item}}</option>
+                    }
+                </select>
+                <input formControlName="cedula" type="text" name="cedula" id="">
+            </div>
+            <!-- RIF INPUT -->
+            <label for="rif">Rif:</label>
+            <div>
+                <select formControlName="rif_tipo" name="rif_tipo" id="">
+                    @for (item of selectTypes; track selectTypes) {
+                        <option [ngValue]="item">{{item}}</option>
+                    }
+                </select>
+                <input formControlName="rif" type="text" name="rif" id="">
+            </div>
+            <!-- EMAIL INPUT -->
+            <label for="email">Email:</label>
+            <input  formControlName="email" type="email" name="email">
+            <!-- BIRTHDAY INPUT -->
+            <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+            <input formControlName="fecha_nacimiento" type="date" name="fecha_nacimiento" id="">
+            <!-- ADRESS INPUT -->
+            <label for="direccion">Direccion:</label>
+            <input formControlName="direccion" type="text" name="direccion" id="">
+            <!-- SUBMIT BUTTON -->
+            <button class="text-lg font-semibold text-white bg-teal-500 rounded-full mt-4 mx-auto px-8 py-1 w-1/2 hover:cursor-pointer hover:bg-teal-600" type="submit" [disabled]="">Crear</button>
+        </form>
+    }
+    @case ('alumno') {
+    }
+}

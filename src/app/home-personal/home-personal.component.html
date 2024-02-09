@@ -1,1 +1,25 @@
-<p>home-personal works!</p>
+<app-header></app-header>
+<app-buger-btn></app-buger-btn>
+
+<h2 class="text-center my-2 text-4xl font-bold text-slate-700">Bienvenido!</h2>
+<!-- CREATE USER FORM -->
+<form (submit)="onSubmit($event)" [formGroup]="createUserForm" class="w-full bg-slate-100 my-4 p-2">
+    <h3 class="text-2xl font-semibold text-slate-700">Crear usuario</h3>
+    <div class="flex flex-row *:my-2 p-1">
+       <!-- REACTIVE FORM SELECT  -->
+        <label class="basis-2/3 sm:basis-2/5 text-lg text-slate-700">Selccione el tipo de usuario:</label>
+        <select (change)="selectHandler()" formControlName='userType' name="userType" id="userType" class="text-lg font-semibold  text-slate-700 basis-1/3 sm:basis-3/5 capitalize bg-transparent  border-b-2 border-teal-500 focus:ring-transparent focus-visible:ring">
+            @for (user of userTypes; track userTypes) {
+                <option [ngValue]="user">{{user}}</option>
+            }   
+        </select>
+    </div>
+    <!-- REACTIVE FORM -->
+    <app-create-form [userType]="selectedUserType"></app-create-form>
+    
+</form>
+<!-- DELETE USER FORM -->
+<section class="w-full bg-slate-100 my-4 p-2">
+    <h3 class="text-xl font-semibold text-slate-700">Eliminar usuario</h3>
+</section>
+

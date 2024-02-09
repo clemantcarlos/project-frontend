@@ -1,0 +1,21 @@
+<form (submit)="submitHandler()" [formGroup]="form" class="flex flex-row mb-5 max-w-screen-lg mx-auto">
+    <div class="basis-4/5 flex flex-row border rounded-l-full py-2 border-teal-500">
+      <label for="searchInput" class="basis-1/5 text-center">
+        <fa-icon class="text-gray-500" [icon]="faSearch"></fa-icon>
+      </label>
+      <input
+        formControlName="input"
+        type="text"
+        name="searchInput"
+        class="basis-4/5 border-0 hover:border-0 focus:outline-none ml-2"
+        placeholder="Buscar"/>
+    </div>
+    <button
+      class="
+      basis-1/5 h-full w-full border rounded-r-full border-teal-500 py-2 bg-teal-500 hover:cursor-pointer hover:bg-teal-600 hover:border-teal-600 disabled:bg-gray-300 disabled:border-gray-300 disabled:hover:cursor-default"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      <fa-icon class="text-white pr-2 font-bold" [icon]="faSearch"></fa-icon>
+    </button>
+  </form>

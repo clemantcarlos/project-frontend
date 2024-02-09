@@ -1,0 +1,101 @@
+<app-search (value)="searchBarHandler($event)"></app-search>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <form [formGroup]="filters" action="" class="max-w-sm m-3">
+    <label for="tableSelect" class="sr-only">tableSelect</label>
+    <select
+      (change)="fetchData()"
+      formControlName="table"
+      id="tableSelect"
+      class="block py-2.5 px-0 w-full font-bold capitalize text-lg bg-transparent border-b-2 text-gray-700 border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+    >
+      @for (table of tables; track $index) {
+      <option [ngValue]="table">{{ table }}</option>
+      }
+    </select>
+  </form>
+  <table
+    class="w-full text-sm text-left rtl:text-right text-gray-600 dark:text-gray-600"
+  >
+    <thead
+      class="text-xs text-white uppercase bg-gray-50 dark:bg-teal-700 dark:text-white"
+    >
+      <tr>
+        @for (col of columns; track columns) {
+        <th scope="col" class="px-6 py-3">
+          {{ col }}
+        </th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of users; track users) {
+        @switch (selectedTable) {
+          @case('personal'){
+          <tr class="bg-white border-b">
+            <th scope="row" class="px-6 py-4">{{ user.nombre }}</th>
+            <td class="px-6 py-4">{{ user.apellido }}</td>
+            <td class="px-6 py-4">{{ user.cedula_tipo + user.cedula }}</td>
+            <td class="px-6 py-4">{{ user.direccion }}</td>
+            <td class="px-6 py-4">{{ user.email }}</td>
+            <td class="px-6 py-4">{{ user.fecha_nacimiento.split("T")[0] }}</td>
+            <td class="px-6 py-4">{{ user.telefono }}</td>
+            <td class="px-6 py-4">{{ user.rif_tipo + user.rif }}</td>
+            <td class="px-6 py-4">{{ user.id_tipo_personal }}</td>
+            <td class="px-6 py-4">{{ user.id_grado_academico }}</td>
+            <td class="px-6 py-4 text-right">
+              <a
+                routerLink="/users/{{ user.id }}"
+                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                >Detalles</a
+              >
+            </td>
+          </tr>
+          } @case ('alumnos'){
+          <tr class="bg-white border-b">
+            <th scope="row" class="px-6 py-4">{{ user.nombre }}</th>
+            <td class="px-6 py-4">{{ user.apellido }}</td>
+            <td class="px-6 py-4">{{ user.cedula_tipo + user.cedula }}</td>
+            <td class="px-6 py-4">{{ user.email }}</td>
+            <td class="px-6 py-4">{{ user.fecha_nacimiento.split("T")[0] }}</td>
+            <td class="px-6 py-4">
+              {{ user.parent_cedula_tipo + user.parent_cedula }}
+            </td>
+            <td class="px-6 py-4">{{ user.id_sexo }}</td>
+            <td class="px-6 py-4 text-right">
+              <a
+                routerLink="/users/{{ user.id }}"
+                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                >Detalles</a
+              >
+            </td>
+          </tr>
+          } @case ('representantes') {
+          <tr class="bg-white border-b">
+            <th scope="row" class="px-6 py-4">{{ user.nombre }}</th>
+            <td class="px-6 py-4">{{ user.apellido }}</td>
+            <td class="px-6 py-4">{{ user.cedula_tipo + user.cedula }}</td>
+            <td class="px-6 py-4">{{ user.direccion }}</td>
+            <td class="px-6 py-4">{{ user.email }}</td>
+            <td class="px-6 py-4">{{ user.fecha_nacimiento.split("T")[0] }}</td>
+            <td class="px-6 py-4">{{ user.telefono }}</td>
+            <td class="px-6 py-4 text-right">
+              <a
+                routerLink="/users/{{ user.id }}"
+                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                >Detalles</a
+              >
+            </td>
+          </tr>
+      } } }@empty {
+      <tr>
+        <td class="text-center p-4" colspan="12">
+          <span class="font-bold text-lg">CARGANDO</span>
+          <div class="flex w-full justify-center *:h-12 *:w-12 my-3">
+            <app-loading-spinner></app-loading-spinner>
+          </div>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

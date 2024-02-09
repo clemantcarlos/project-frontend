@@ -1,0 +1,167 @@
+<h2 class="text-4xl font-bold text-center bg-slate-50 py-4 text-teal-500">Detalles de usuario</h2>
+<div class="w-full h-dvh bg-slate-50 p-2 flex flex-col gap-2">
+    @switch (userType) {
+        @case ('personal') {
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <h3 class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Nombre:</span> {{user.nombre}} {{user.apellido}}
+                </h3>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Cedula:</span> {{user.cedula_tipo+user.cedula}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Rif:</span> {{user.rif_tipo+user.rif}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Nro Telefono:</span> {{user.telefono}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Fecha de nacimiento:</span> {{user.fecha_nacimiento.split("T")[0]}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Email:</span> {{user.email}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Grado Academico:</span> {{user.id_grado_academico}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Tipo de personal:</span> {{user.id_tipo_personal}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+        }
+        @case ('alumno') {
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Nombre:</span> {{user.nombre}} {{user.apellido}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Cedula:</span> {{user.cedula+user.cedula_tipo}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Email:</span> {{user.email}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Fecha de nacimiento:</span> {{user.fecha_nacimiento.split("T")[0]}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Sexo:</span> {{user.id_sexo}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+
+            @if (parent) {
+                @for (parent of parent; track parent) {
+                    <div class="bg-white p-4 rounded shadow-md h-min flex justify-between flex-col my-4 *:my-3">
+                        <h4 class="font-bold text-slate-600 text-3xl self-center py-2">Representante</h4>
+                        <span class="text-slate-600 text-xl">
+                             <strong>Nombre:</strong> {{parent.nombre}} {{parent.apellido}}
+                        </span>
+                        <span class="text-slate-600 text-xl">
+                             <strong>Telefono:</strong> {{parent.telefono}}
+                        </span>
+                        <span class="text-slate-600 text-xl">
+                             <strong>Direccion:</strong> {{parent.direccion}}
+                        </span>
+                        <button (click)="parentDetail(parent.id)" class="text-xl font-semibold bg-teal-500 text-white py-1 rounded-full w-1/3 self-center">Detalles</button>
+                    </div>
+                }
+            }
+        }
+        @case ('representante') {
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Nombre:</span> {{user.nombre}} {{user.apellido}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Cedula:</span> {{user.cedula+user.cedula_tipo}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Email:</span> {{user.email}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Fecha de nacimiento:</span> {{user.fecha_nacimiento.split("T")[0]}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">Direccion:</span> {{user.direccion}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
+                <span class="font-semibold text-slate-500 text-2xl">
+                    <span class="font-bold text-slate-600 text-3xl">telefono:</span> {{user.telefono}}
+                </span>
+                <button class="font-semibold text-teal-500">Editar</button>
+            </div>
+            @if (child && !child.message) {
+                @for (child of child; track child) {
+                    <div class=" bg-white p-4 rounded shadow-md h-min flex justify-between flex-col my-4 *:my-3">
+                        <h4 class="font-bold text-slate-600 text-3xl self-center py-2">Representados</h4>
+                        <span class="text-slate-600 text-xl">
+                             <strong>Nombre:</strong> {{child.nombre}} {{child.apellido}}
+                        </span>
+                        <span class="text-slate-600 text-xl">
+                             <strong>Telefono:</strong> {{child.cedula_tipo+child.cedula}}
+                        </span>
+                        <span class="text-slate-600 text-xl">
+                             <strong>Sexo:</strong> {{child.id_sexo}}
+                        </span>
+                        <button (click)="childDetail(child.id)" class="text-xl font-semibold bg-teal-500 text-white py-1 rounded-full w-1/3 self-center">Detalles</button>
+                        <div class="border border-b-gray-100"></div>
+                    </div>
+                }
+            }
+        }
+        @default {
+            <h3 class="font-bold text-lg text-center">CARGANDO</h3>
+            <div class="flex w-full justify-center *:h-12 *:w-12 my-3">
+              <app-loading-spinner></app-loading-spinner>
+            </div>
+        }
+    }
+</div>
