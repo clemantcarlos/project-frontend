@@ -15,4 +15,13 @@ export class ApiServicePersonal {
     const url = 'https://escuela-api-production.up.railway.app/personal'
     return this.http.get<personalInterface[]>(url);
   }
+  post(personal:personalInterface):Observable<any>{
+    const url = 'http://localhost:3000/personal'
+    return this.http.post<any>(
+      url,
+      personal,
+      { headers:{'Context-Type':'application/json'} }
+    );
+  }
+
 } 

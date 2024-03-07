@@ -1,5 +1,4 @@
 export interface personalInterface {
-    id:string;
     nombre:string;
     apellido:string;
     direccion:string;

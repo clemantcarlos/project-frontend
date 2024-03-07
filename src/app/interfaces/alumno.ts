@@ -1,5 +1,4 @@
 export interface alumnoInterface {
-    id:string;
     nombre:string;
     apelliddo:string;
     direccion:string;
