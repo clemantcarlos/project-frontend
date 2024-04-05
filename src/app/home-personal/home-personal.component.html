@@ -20,14 +20,27 @@
             <app-create-form [userType]="selectedUserType"></app-create-form>
         </div>
     </form>
-    <div class="w-full flex flex-col">
+    <div class="w-full flex flex-col items-center">
         <!-- DELETE USER FORM -->
-        <section class="basis-1/2 rounded-lg bg-slate-100 w-full my-4 p-8">
+        <section class="w-full sm:max-w-2xl basis-1/5 rounded-lg bg-slate-100 my-4 p-8">
             <h3 class="text-2xl font-semibold text-slate-700">Eliminar usuario</h3>
+            <app-delete-form></app-delete-form>
         </section>
         <!-- PATCH USER FORM -->
-        <section class="basis-1/2 rounded-lg bg-slate-100 w-full my-4 p-8">
-            <h3 class="text-2xl font-semibold text-slate-700">Modificar usuario</h3>
+        <section class="w-full sm:max-w-2xl basis-4/5 rounded-lg bg-slate-100 my-4 p-8">
+            <form action="" [formGroup]="patchUserForm">
+                <h3 class="text-2xl font-semibold text-slate-700">Modificar usuario</h3>
+                <div class="flex flex-row *:my-2 p-1">
+                    <!-- REACTIVE FORM SELECT  -->
+                     <label class="basis-2/3 sm:basis-2/5 text-lg text-slate-700">Selccione el tipo de usuario:</label>
+                     <select (change)="patchSelectHandler()" formControlName='userType' name="userType" id="userType" class="text-lg font-semibold  text-slate-700 basis-1/3 sm:basis-3/5 capitalize bg-transparent  border-b-2 border-teal-500 focus:ring-transparent focus-visible:ring">
+                         @for (user of userTypes; track userTypes) {
+                             <option [ngValue]="user">{{user}}</option>
+                         }   
+                     </select>
+                 </div>
+                <app-patch-form [userType]="patchSelectedUserType"></app-patch-form>
+            </form>
         </section>
     </div>
 </div>

@@ -6,49 +6,41 @@
                 <h3 class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Nombre:</span> {{user.nombre}} {{user.apellido}}
                 </h3>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Cedula:</span> {{user.cedula_tipo+user.cedula}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Rif:</span> {{user.rif_tipo+user.rif}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Nro Telefono:</span> {{user.telefono}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Fecha de nacimiento:</span> {{user.fecha_nacimiento.split("T")[0]}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Email:</span> {{user.email}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Grado Academico:</span> {{user.id_grado_academico}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Tipo de personal:</span> {{user.id_tipo_personal}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
         }
         @case ('alumno') {
@@ -56,31 +48,26 @@
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Nombre:</span> {{user.nombre}} {{user.apellido}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Cedula:</span> {{user.cedula+user.cedula_tipo}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Email:</span> {{user.email}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Fecha de nacimiento:</span> {{user.fecha_nacimiento.split("T")[0]}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Sexo:</span> {{user.id_sexo}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
 
             @if (parent) {
@@ -106,37 +93,31 @@
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Nombre:</span> {{user.nombre}} {{user.apellido}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Cedula:</span> {{user.cedula+user.cedula_tipo}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Email:</span> {{user.email}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Fecha de nacimiento:</span> {{user.fecha_nacimiento.split("T")[0]}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">Direccion:</span> {{user.direccion}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             <div class="bg-white p-4 rounded shadow-md h-min flex justify-between">
                 <span class="font-semibold text-slate-500 text-2xl">
                     <span class="font-bold text-slate-600 text-3xl">telefono:</span> {{user.telefono}}
                 </span>
-                <button class="font-semibold text-teal-500">Editar</button>
             </div>
             @if (child && !child.message) {
                 @for (child of child; track child) {

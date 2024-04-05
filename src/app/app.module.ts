@@ -18,6 +18,10 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { UserTableComponent } from './components/user-table/user-table.component';
 import { SearchComponent } from './components/search/search.component';
 import { CreateFormComponent } from './components/create-form/create-form.component';
+import { DeleteFormComponent } from './components/delete-form/delete-form.component';
+import { PatchFormComponent } from './components/patch-form/patch-form.component';
+import { ConfigComponent } from './config/config.component';
+import { CreateConfigComponent } from './components/create-config/create-config.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,11 @@ import { CreateFormComponent } from './components/create-form/create-form.compon
     LoadingSpinnerComponent,
     UserTableComponent,
     SearchComponent,
-    CreateFormComponent
+    CreateFormComponent,
+    DeleteFormComponent,
+    PatchFormComponent,
+    ConfigComponent,
+    CreateConfigComponent
   ],
   imports: [
     BrowserModule,

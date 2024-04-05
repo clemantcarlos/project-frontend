@@ -6,6 +6,7 @@ import { loginHomeGuard } from './guards/login/login-home.guard';
 import { Page404Component } from './page404/page404.component';
 import { UsersComponent } from './users/users.component';
 import { UserComponent } from './user/user.component';
+import { ConfigComponent } from './config/config.component';
 const routes: Routes = [
   {
     path:'users/user/:id',
@@ -18,6 +19,11 @@ const routes: Routes = [
   {
     path:'users',
     component:UsersComponent
+  },
+  {
+    path:'config',
+    component:ConfigComponent,
+    canActivate:[loginHomeGuard]
   },
   {
     path:'home',

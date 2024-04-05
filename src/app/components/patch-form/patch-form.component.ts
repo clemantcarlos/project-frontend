@@ -1,29 +1,27 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder,Validators } from '@angular/forms';
-import { academicDegree } from '../../interfaces/academicDegree';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ApiServicePersonal } from '../../services/personal/api.service';
-import { HttpClient} from '@angular/common/http';
-import Swal from 'sweetalert2';
 import { ApiServiceAlumno } from '../../services/alumno/api.service';
 import { ApiServiceRepresentante } from '../../services/representante/api.service';
-@Component({
-  selector: 'app-create-form',
-  templateUrl: './create-form.component.html',
-  styleUrl: './create-form.component.css'
-})
+import { HttpClient } from '@angular/common/http';
 
-export class CreateFormComponent {
-  @Input() userType = '';
+@Component({
+  selector: 'app-patch-form',
+  templateUrl: './patch-form.component.html',
+  styleUrl: './patch-form.component.css'
+})
+export class PatchFormComponent {
+  @Input() userType:string=''
 
   constructor(
-    private formBuilder:FormBuilder,
-    private Personal:ApiServicePersonal,
-    private Alumno:ApiServiceAlumno,
-    private Representante:ApiServiceRepresentante,
-    private http:HttpClient){}
+    private formBuilder: FormBuilder,
+    private Personal: ApiServicePersonal,
+    private Alumno: ApiServiceAlumno,
+    private Representante: ApiServiceRepresentante,
+    private http: HttpClient) { }
 
   selectTypes:Array<any>=['V','J','E'];
-  academicDegrees:academicDegree[]=[
+  academicDegrees:any=[
     {id:1,name:"Bachiller"}
   ]
   personalTypes:any=[
@@ -108,7 +106,7 @@ export class CreateFormComponent {
   onSubmit(event:any){
 
     this.loding=true
-    this.sendData(this.userType)
+    // this.sendData(this.userType)
   }
 
 
@@ -145,158 +143,4 @@ export class CreateFormComponent {
   get representantePhoneNumber() { return this.representanteForm.get('telefono') }
   get representanteAdress() { return this.representanteForm.get('direccion') }
 
-
-  sendData(type:string){ 
-
-    if(type==='personal'){
-      const personalFormatedDate=new Date(this.personalBirthday.value).toISOString()
-      // DATA
-      const personal = {
-        nombre: this.personalName.value,
-        apellido: this.personalLastName.value,
-        direccion: this.personalAdress.value,
-        email: this.personalEmail.value,
-        fecha_nacimiento: personalFormatedDate,
-        cedula: this.personalCedula.value,
-        cedula_tipo: this.personalCedulaType.value,
-        telefono: this.personalPhoneNumber.value,
-        rif: this.personalRif.value,
-        rif_tipo: this.personalRifType.value,
-        id_tipo_personal: this.personalType.value,
-        id_grado_academico: this.academicDegree.value
-      }
-      // POST PERSONAL
-      this.Personal.post(personal)
-      .subscribe(
-      data=>{
-        if(data.message){
-          return Swal.fire({
-            title: 'No se pudo crear el usuario',
-            text: data.message,
-            icon: 'warning'
-          })
-          }
-        return Swal.fire({
-          title: "Usuario creado",
-          text:`
-            Nombre: ${data.nombre},
-            Apellido: ${data.apellido},
-            Cedula: ${data.cedula_tipo}-${data.cedula}
-          `,
-          icon: "success"
-        });
-      },
-      error=>{
-        if(!error.ok){
-          return Swal.fire({
-            icon: "error",
-            title: 'No se pudo conectar con el servidor',
-          })
-        }
-        return
-      })
-      .add(()=>{
-        this.loding=false
-      });
-    }
-    if(type==='alumno'){
-      const alumnoFormatedDate=new Date(this.alumnoBirthday.value).toISOString()
-      // DATA
-      const alumno = {
-        nombre: this.alumnoName.value,
-        apellido: this.alumnoLastName.value,
-        email: this.alumnoEmail.value,
-        fecha_nacimiento: alumnoFormatedDate,
-        cedula: this.alumnoCedula.value,
-        cedula_tipo: this.alumnoCedulaType.value,
-        parent_cedula: this.alumnoParentCedula.value,
-        parent_cedula_tipo: this.alumnoParentCedulaType.value,
-        id_sexo:this.alumnoBiologicalSex.value
-      }
-      // POST ALUMNO
-      this.Alumno.post(alumno)
-      .subscribe(
-      data=>{
-        
-        if(data.message){
-          return Swal.fire({
-            title: 'No se pudo crear el usuario',
-            text: data.message,
-            icon: 'warning'
-          })
-          }
-        return Swal.fire({
-          title: "Usuario creado",
-          text:`
-            Nombre: ${data.nombre},
-            Apellido: ${data.apellido},
-            Cedula: ${data.cedula_tipo}-${data.cedula}
-          `,
-          icon: "success"
-        });
-      },
-      error=>{
-        if(!error.ok){
-          return Swal.fire({
-            icon: "error",
-            title: 'No se pudo conectar con el servidor',
-          })
-        }
-        return
-      })
-      .add(()=>{
-        this.loding=false
-      });
-    }
-    if(type==='representante'){
-      const representanteFormatedDate=new Date(this.representanteBirthday.value).toISOString()
-      // DATA
-      const representante = {
-        nombre: this.representanteName.value,
-        apellido: this.representanteLastName.value,
-        email: this.representanteEmail.value,
-        telefono: this.representantePhoneNumber.value,
-        direccion: this.representanteAdress.value,
-        fecha_nacimiento: representanteFormatedDate,
-        cedula: this.representanteCedula.value,
-        cedula_tipo: this.representanteCedulaType.value,
-      }
-      console.log(representante);
-      
-      // POST REPRESENTANTE
-      this.Representante.post(representante)
-      .subscribe(
-      data=>{
-        
-        if(data.message){
-          return Swal.fire({
-            title: 'No se pudo crear el usuario',
-            text: data.message,
-            icon: 'warning'
-          })
-          }
-        return Swal.fire({
-          title: "Usuario creado",
-          text:`
-            Nombre: ${data.nombre},
-            Apellido: ${data.apellido},
-            Cedula: ${data.cedula_tipo}-${data.cedula}
-          `,
-          icon: "success"
-        });
-      },
-      error=>{
-        if(!error.ok){
-          return Swal.fire({
-            icon: "error",
-            title: 'No se pudo conectar con el servidor',
-          })
-        }
-        return
-      })
-      .add(()=>{
-        this.loding=false
-      });
-    }
-  }
 }

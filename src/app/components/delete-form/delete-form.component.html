@@ -1,0 +1,30 @@
+<form action="" [formGroup]="deleteForm"  (submit)="submitHandler()">
+    <!-- CEDULA LABEL-->
+    <label for="cedula">
+        <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+            Cedula:
+        </span>
+    </label>
+    <!-- CEDULA VALIDATION -->
+    @if(cedula.invalid && (cedula.touched || cedula.dirty)){
+        <div class="text-red-700 font-bold">
+            <div *ngIf="cedula.errors?.['required']">Cedula es obligatorio.</div>
+            <div *ngIf="cedula.errors?.['pattern']">Cedula tiene que ser numerico.</div>
+        </div>
+    }
+    <!-- CEDULA INPUTS -->
+    <div class="flex items-center">
+        <!-- CEDULA TYPES -->
+        <select formControlName="cedula_tipo" name="cedula_tipo" class="basis-12 border rounded-l-md mt-1 px-3 py-2 shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 focus:ring-1">
+            @for (item of selectTypes; track selectTypes) {
+                <option [ngValue]="item">{{item}}</option>
+            }
+        </select>
+        <!-- CEDULA INPUT -->
+        <input type="number" inputmode="numeric" formControlName="cedula" type="text" name="cedula" class="basis-full border  mt-1 px-3 py-2 shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 focus:ring-1">
+        
+        <button [disabled]="deleteForm.invalid" class="h-10.5 py-2 px-4 mt-1 text-white disabled:text-gray-500 bg-teal-600 disabled:bg-white border rounded-r-md border-teal-600 disabled:border-slate-300" type="submit">
+            <fa-icon [icon]="faSearch"></fa-icon>
+        </button>
+    </div>
+</form>

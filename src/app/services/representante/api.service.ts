@@ -17,4 +17,16 @@ export class ApiServiceRepresentante {
     if (cedulaChild) url+=`?cedulaParent=${cedulaChild}`
     return this.http.get<representanteInterface[]>(url);
   }
+  post(representante:representanteInterface):Observable<any>{
+    const url = 'https://escuela-api-production.up.railway.app/representante'
+    return this.http.post<any>(
+      url,
+      representante,
+      { headers:{'Context-Type':'application/json'} }
+    );
+  }
+  delete(id:string):Observable<any>{
+    const url = `https://escuela-api-production.up.railway.app/representante/${id}`
+    return this.http.delete<any>(url)
+  }
 }

@@ -8,35 +8,48 @@ import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@ang
 })
 export class HomePersonalComponent {
 
-  constructor(private formBuilder:FormBuilder){}
+  constructor(private formBuilder: FormBuilder) { }
 
- createUserForm:any
- deleteUserForm:any
- 
- selectedUserType:string='personal'
+  createUserForm: any
+  patchUserForm: any
 
- userTypes:Array<string>=[
-  'personal',
-  'alumno'
-]
+  selectedUserType: string = 'personal'
+  patchSelectedUserType: string = 'personal'
 
- ngOnInit(){
-  this.createUserForm= new FormGroup({
-    userType: new FormControl(null)
-  })
-  
-  this.createUserForm.controls['userType'].setValue(this.userTypes[0],{onlyself:true})
- }
+  userTypes: Array<string> = [
+    'personal',
+    'alumno',
+    'representante'
+  ]
 
- get userType():string{
-  return this.createUserForm.get('userType').value
-}
+  ngOnInit() {
+    this.createUserForm = new FormGroup({
+      userType: new FormControl(null)
+    })
+    this.patchUserForm = new FormGroup({
+      userType: new FormControl(null)
+    })
 
- onSubmit(event:any){
-  // console.log(event);
-  console.log(this.createUserForm.value)
- }
- selectHandler(){
-  this.selectedUserType=this.userType
- }
+    this.createUserForm.controls['userType'].setValue(this.userTypes[0], { onlyself: true })
+    this.patchUserForm.controls['userType'].setValue(this.userTypes[0], { onlyself: true })
+  }
+
+  get userType(): string {
+    return this.createUserForm.get('userType').value
+  }
+  get userTypePatch(): string {
+    return this.patchUserForm.get('userType').value
+  }
+
+  onSubmit(event: any) {
+    console.log(this.createUserForm.value)
+  }
+
+  selectHandler() {
+    this.selectedUserType = this.userType
+  }
+  patchSelectHandler() {
+    this.patchSelectedUserType = this.userTypePatch
+    console.log(this.userType);
+  }
 }

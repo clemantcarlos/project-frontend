@@ -1,7 +1,7 @@
 export interface representanteInterface{
-    id:string;
+    id?:string;
     nombre:string;
-    apelliddo:string;
+    apellido:string;
     direccion:string;
     email:string;
     fecha_nacimiento:string;
