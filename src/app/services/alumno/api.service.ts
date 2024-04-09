@@ -12,12 +12,12 @@ export class ApiServiceAlumno {
   constructor(private http:HttpClient) { }
 
   get(cedulaParent?:number):Observable<alumnoInterface[]>{
-    let url = 'https://escuela-api-production.up.railway.app/alumno'
+    let url = 'http://localhost:3000/alumno'
     if(cedulaParent) url+=`?cedulaParent=${cedulaParent}`
     return this.http.get<alumnoInterface[]>(url);
   }
   post(alumno:alumnoInterface):Observable<any>{
-    const url = 'https://escuela-api-production.up.railway.app/alumno'
+    const url = 'http://localhost:3000/alumno'
     return this.http.post<any>(
       url,
       alumno,
@@ -25,7 +25,7 @@ export class ApiServiceAlumno {
     );
   }
   delete(id:string):Observable<any>{
-    const url = `https://escuela-api-production.up.railway.app/alumno/${id}`
+    const url = `http://localhost:3000/alumno/${id}`
     return this.http.delete<any>(url)
   }
 }

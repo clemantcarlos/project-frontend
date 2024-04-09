@@ -1,8 +1,15 @@
 <form action="" [formGroup]="form" (submit)="submitHandler()">
+  <div>
+    <h3 class="text-2xl font-semibold text-slate-700">Crear</h3>
+    <select formControlName="type" name="type" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 block w-full rounded-md sm:text-sm focus:ring-1">
+      @for (item of typeList; track typeList) {
+          <option [ngValue]="item">{{item}}</option>
+      }
+  </select> 
+  </div>
+
   <label for="nombre">
-    <span
-      class="mt-4 after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700"
-    >
+    <span class="mt-4 after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
       Nombre:
     </span>
   </label>
@@ -10,14 +17,13 @@
   <div class="text-red-700 font-bold">
     <div *ngIf="nombre.errors?.['required']">Nombre es obligatorio.</div>
   </div>
-  } 
-  
-  <input formControlName="nombre" type="text" name="nombre" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 block w-full rounded-md sm:text-sm focus:ring-1">
-  
+  }
+
+  <input formControlName="nombre" type="text" name="nombre"
+    class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 block w-full rounded-md sm:text-sm focus:ring-1">
+
   <label for="descripcion">
-    <span
-      class="mt-4 after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700"
-    >
+    <span class="mt-4 after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
       Descripcion:
     </span>
   </label>
@@ -25,17 +31,16 @@
   <div class="text-red-700 font-bold">
     <div *ngIf="descripcion.errors?.['required']">Decripcion es obligatorio.</div>
   </div>
-  } 
-  <input formControlName="descripcion" type="text" name="descripcion" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 block w-full rounded-md sm:text-sm focus:ring-1">
-  
- 
+  }
+  <input formControlName="descripcion" type="text" name="descripcion"
+    class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 block w-full rounded-md sm:text-sm focus:ring-1">
+
+
   @if(!loading){
   <!-- SUBMIT BUTTON -->
   <button
     class="w-full disabled:bg-slate-400 disabled:opacity-75 disabled:hover:bg-slate-400 bg-teal-700 hover:bg-teal-800 my-4 py-2 rounded-full text-white font-semibold text-xl"
-    type="submit"
-    [disabled]="form.invalid"
-  >
+    type="submit" [disabled]="form.invalid">
     Crear
   </button>
   }@else {

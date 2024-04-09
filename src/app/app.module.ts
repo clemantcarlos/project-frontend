@@ -22,6 +22,10 @@ import { DeleteFormComponent } from './components/delete-form/delete-form.compon
 import { PatchFormComponent } from './components/patch-form/patch-form.component';
 import { ConfigComponent } from './config/config.component';
 import { CreateConfigComponent } from './components/create-config/create-config.component';
+import { ConfigTableComponent } from './components/config-table/config-table.component';
+import { ReportsComponent } from './reports/reports.component';
+import { AlumnosSeccionComponent } from './reportes/alumnos-seccion/alumnos-seccion.component';
+import { GeneralComponent } from './reportes/general/general.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import { CreateConfigComponent } from './components/create-config/create-config.
     DeleteFormComponent,
     PatchFormComponent,
     ConfigComponent,
-    CreateConfigComponent
+    CreateConfigComponent,
+    ConfigTableComponent,
+    ReportsComponent,
+    AlumnosSeccionComponent,
+    GeneralComponent,
   ],
   imports: [
     BrowserModule,

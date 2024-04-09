@@ -57,6 +57,8 @@ export class LoginComponent {
         // form request
       this.Personal.get()
       .subscribe( res => {
+
+        // const personal = res.find(( p:any )=>p.tipoPersonal == this.loginEmail?.value)
         
         const personal = res.find(( p:any )=>p.email==this.loginEmail?.value)
 
@@ -81,7 +83,19 @@ export class LoginComponent {
             this.loginForm.reset()
             return
           });
-        }else{
+        }
+        else if(personal?.id_tipo_personal!=="e14d7a33-8cc8-4a32-8281-9c49fe2d2056" && personal?.id_tipo_personal !== "82045d1a-3ef3-4397-b1d4-67956ca042fe"){
+          Swal.fire({
+            icon: "error",
+            title: "Acceso denegado",
+          })
+          .finally(()=>{
+            if(localStorage.getItem('user')!==null) localStorage.removeItem('user')
+            this.loginForm.reset()
+            return
+          });
+        }
+        else{
           localStorage.setItem('user',JSON.stringify (personal))
           this.router.navigate(['/home'])
         }

@@ -4,6 +4,7 @@ import { ApiServicePersonal } from '../../services/personal/api.service';
 import { ApiServiceAlumno } from '../../services/alumno/api.service';
 import { ApiServiceRepresentante } from '../../services/representante/api.service';
 import Swal from 'sweetalert2';
+import { ConfigService } from '../../services/config/config.service';
 
 @Component({
   selector: 'app-user-table',
@@ -26,24 +27,53 @@ export class UserTableComponent {
   alumnoColumns:string[]=[
     'Nombre','Apellido','Cedula',
     'Email','Fecha de nacimiento', 
-    'Cedula Representante','sexo', ''
+    'Cedula Representante','Sexo','Turno','Grado','Seccion', ''
   ]
   personalColumns:string[]=[
     'Nombre','Apellido','Cedula','Direccion',
     'Email','Fecha de nacimiento', 'Telefono', 
-    'Rif', 'Tipo de personal', 'Grado Academico', ''
+    'Rif', 'Tipo de personal', 'Grado Academico', 'Turno', ''
   ]
   representanteColumns:string[]=[
     'Nombre','Apellido','Cedula','Direccion','Email','Fecha de nacimiento','Telefono',''
   ]
 
+  turnoList:any;
+  gradoEscolarList:any;
+  seccionList:any;
+  academicDegrees:any;
+  personalTypes:any;
+  biologicalSex:any;
 
   constructor(
+    private Config:ConfigService,
     private Personal:ApiServicePersonal,
     private Representante:ApiServiceRepresentante,
     private Alumno:ApiServiceAlumno){}
 
   ngOnInit(){
+
+    this.Config.getTurno().subscribe(resp=>{
+      this.turnoList=resp
+    })
+    this.Config.getGradoEscolar().subscribe(resp=>{
+      this.gradoEscolarList=resp
+    })
+    this.Config.getSeccion().subscribe(resp=>{
+      this.seccionList=resp
+    })
+    this.Config.getTipoPersonal().subscribe(resp=>{
+      this.personalTypes=resp
+    })
+    this.Config.getGradoAcademico().subscribe(resp=>{
+      this.academicDegrees=resp
+    })
+    this.Config.getTurno().subscribe(resp=>{
+      this.turnoList=resp
+    })
+    this.Config.getGenero().subscribe(resp=>{
+      this.biologicalSex=resp
+    })
 
     // Form
     this.filters= new FormGroup({

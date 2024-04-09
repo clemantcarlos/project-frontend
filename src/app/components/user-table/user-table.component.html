@@ -40,8 +40,22 @@
             <td class="px-6 py-4">{{ user.fecha_nacimiento.split("T")[0] }}</td>
             <td class="px-6 py-4">{{ user.telefono }}</td>
             <td class="px-6 py-4">{{ user.rif_tipo + user.rif }}</td>
-            <td class="px-6 py-4">{{ user.id_tipo_personal }}</td>
-            <td class="px-6 py-4">{{ user.id_grado_academico }}</td>
+            @for (item of personalTypes; track personalTypes) {
+              @if(item.id===user.id_tipo_personal){
+                <td class="px-6 py-4">{{ item.nombre }}</td>
+              }
+            }
+            @for (item of academicDegrees; track academicDegrees) {
+              @if(item.id===user.id_grado_academico){
+                <td class="px-6 py-4">{{ item.nombre }}</td>
+              }
+            }
+            @for (item of turnoList; track turnoList) {
+              @if(item.id===user.id_turno){
+                <td class="px-6 py-4">{{ item.nombre }}</td>
+              }
+            }
+            
             <td class="px-6 py-4 text-right">
               <a
                 routerLink="/users/{{ user.id }}"
@@ -60,7 +74,26 @@
             <td class="px-6 py-4">
               {{ user.parent_cedula_tipo + user.parent_cedula }}
             </td>
-            <td class="px-6 py-4">{{ user.id_sexo }}</td>
+            @for (item of biologicalSex; track biologicalSex) {
+              @if(item.id===user.id_sexo){
+                <td class="px-6 py-4">{{ item.nombre }}</td>
+              }
+            }
+            @for (item of turnoList; track turnoList) {
+              @if(item.id===user.id_turno){
+                <td class="px-6 py-4">{{ item.nombre }}</td>
+              }
+            }
+            @for (item of gradoEscolarList; track gradoEscolarList) {
+              @if(item.id===user.id_grado_escolar){
+                <td class="px-6 py-4">{{ item.nombre }}</td>
+              }
+            }
+            @for (item of seccionList; track seccionList) {
+              @if(item.id===user.id_seccion){
+                <td class="px-6 py-4">{{ item.nombre }}</td>
+              }
+            }
             <td class="px-6 py-4 text-right">
               <a
                 routerLink="/users/{{ user.id }}"

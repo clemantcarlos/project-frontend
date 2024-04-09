@@ -7,6 +7,7 @@ import { Page404Component } from './page404/page404.component';
 import { UsersComponent } from './users/users.component';
 import { UserComponent } from './user/user.component';
 import { ConfigComponent } from './config/config.component';
+import { ReportsComponent } from './reports/reports.component';
 const routes: Routes = [
   {
     path:'users/user/:id',
@@ -19,6 +20,11 @@ const routes: Routes = [
   {
     path:'users',
     component:UsersComponent
+  },
+  {
+    path:'reports',
+    component:ReportsComponent,
+    canActivate:[loginHomeGuard]
   },
   {
     path:'config',

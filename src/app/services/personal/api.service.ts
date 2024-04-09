@@ -11,11 +11,11 @@ export class ApiServicePersonal {
   constructor(private http:HttpClient) { }
 
   get():Observable<personalInterface[]>{
-    const url = 'https://escuela-api-production.up.railway.app/personal'
+    const url = 'http://localhost:3000/personal'
     return this.http.get<personalInterface[]>(url);
   }
   post(personal:personalInterface):Observable<any>{
-    const url = 'https://escuela-api-production.up.railway.app/personal'
+    const url = 'http://localhost:3000/personal'
     return this.http.post<any>(
       url,
       personal,
@@ -23,7 +23,7 @@ export class ApiServicePersonal {
     );
   }
   delete(id:string):Observable<any>{
-    const url = `https://escuela-api-production.up.railway.app/personal/${id}`
+    const url = `http://localhost:3000/personal/${id}`
     return this.http.delete<any>(url)
   }
 } 

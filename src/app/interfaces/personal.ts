@@ -9,6 +9,7 @@ export interface personalInterface {
     telefono:number;
     rif:number;
     rif_tipo:string;
-    id_tipo_personal:number;
-    id_grado_academico:number;
+    id_tipo_personal:string;
+    id_grado_academico:string;
+    id_turno:string;
 }

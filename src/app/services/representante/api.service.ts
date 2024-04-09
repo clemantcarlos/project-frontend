@@ -13,12 +13,12 @@ export class ApiServiceRepresentante {
   constructor(private http:HttpClient) { }
 
   get(cedulaChild?:number):Observable<representanteInterface[]>{
-    let url = 'https://escuela-api-production.up.railway.app/representante'
+    let url = 'http://localhost:3000/representante'
     if (cedulaChild) url+=`?cedulaParent=${cedulaChild}`
     return this.http.get<representanteInterface[]>(url);
   }
   post(representante:representanteInterface):Observable<any>{
-    const url = 'https://escuela-api-production.up.railway.app/representante'
+    const url = 'http://localhost:3000/representante'
     return this.http.post<any>(
       url,
       representante,
@@ -26,7 +26,7 @@ export class ApiServiceRepresentante {
     );
   }
   delete(id:string):Observable<any>{
-    const url = `https://escuela-api-production.up.railway.app/representante/${id}`
+    const url = `http://localhost:3000/representante/${id}`
     return this.http.delete<any>(url)
   }
 }

@@ -6,6 +6,7 @@ import { HttpClient} from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { ApiServiceAlumno } from '../../services/alumno/api.service';
 import { ApiServiceRepresentante } from '../../services/representante/api.service';
+import { ConfigService } from '../../services/config/config.service';
 @Component({
   selector: 'app-create-form',
   templateUrl: './create-form.component.html',
@@ -17,22 +18,20 @@ export class CreateFormComponent {
 
   constructor(
     private formBuilder:FormBuilder,
+    private Config:ConfigService,
     private Personal:ApiServicePersonal,
     private Alumno:ApiServiceAlumno,
     private Representante:ApiServiceRepresentante,
     private http:HttpClient){}
 
-  selectTypes:Array<any>=['V','J','E'];
-  academicDegrees:academicDegree[]=[
-    {id:1,name:"Bachiller"}
-  ]
-  personalTypes:any=[
-    {id:1,name:"Obrero"}
-  ]
-  biologicalSex: any = [
-    { id: 0, name: "Femenino" },
-    { id: 1, name: "Masculino" }
-  ]
+  selectTypes:Array<any>=['V','CE','J','E'];
+  
+  turnoList:any;
+  gradoEscolarList:any;
+  seccionList:any;
+  academicDegrees:any;
+  personalTypes:any;
+  biologicalSex:any;
 
   alumnoForm:any
   personalForm:any
@@ -40,6 +39,30 @@ export class CreateFormComponent {
   loding:boolean=false
 
   ngOnInit(){
+    // SELECT LOAD
+    this.Config.getTurno().subscribe(resp=>{
+      this.turnoList=resp
+    })
+    this.Config.getGradoEscolar().subscribe(resp=>{
+      this.gradoEscolarList=resp
+    })
+    this.Config.getSeccion().subscribe(resp=>{
+      this.seccionList=resp
+    })
+    this.Config.getTipoPersonal().subscribe(resp=>{
+      this.personalTypes=resp
+    })
+    this.Config.getGradoAcademico().subscribe(resp=>{
+      this.academicDegrees=resp
+    })
+    this.Config.getTurno().subscribe(resp=>{
+      this.turnoList=resp
+    })
+    this.Config.getGenero().subscribe(resp=>{
+      this.biologicalSex=resp
+    })
+
+
     // INITIALIZE PERSONAL FORM
     this.personalForm = this.formBuilder.group({
       nombre:['',[Validators.required, Validators.maxLength(255)]],
@@ -54,6 +77,7 @@ export class CreateFormComponent {
       rif_tipo:['',[Validators.required]],
       id_tipo_personal:['',[Validators.required]],
       id_grado_academico:['',[Validators.required]],
+      id_turno:['',[Validators.required]],
     });
     // DEFAULT CEDULA TYPE OPTION
     this.personalForm.controls['cedula_tipo']
@@ -61,12 +85,7 @@ export class CreateFormComponent {
     // DEFAULT RIF TYPE OPTION
     this.personalForm.controls['rif_tipo']
     .setValue(this.selectTypes[0]);
-    // DEFAULT OPTION ACADEMIC DEGREE
-    this.personalForm.controls['id_grado_academico']
-    .setValue(this.academicDegrees[0].id);
-    // DEFAULT OPTION PERSONAL TYPE
-    this.personalForm.controls['id_tipo_personal']
-    .setValue(this.personalTypes[0].id);
+ 
     
     // INITIALIZE ALUMNO FORM 
     this.alumnoForm = this.formBuilder.group({
@@ -79,16 +98,17 @@ export class CreateFormComponent {
       parent_cedula: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       parent_cedula_tipo: [null, [Validators.required]],
       id_sexo: [null, [Validators.required]],
+      id_turno: [null, [Validators.required]],
+      id_seccion: [null, [Validators.required]],
+      id_grado_escolar: [null, [Validators.required]],
     });
     // DEFAULT CEDULA TYPE OPTION
     this.alumnoForm.controls['cedula_tipo']
       .setValue(this.selectTypes[0]);
-    // // DEFAULT PARENT CEDULA TYPE OPTION
+    // DEFAULT PARENT CEDULA TYPE OPTION
     this.alumnoForm.controls['parent_cedula_tipo']
       .setValue(this.selectTypes[0]);
-    // // DEFAULT BIOLOGICAL SEX TYPE OPTION
-    this.alumnoForm.controls['id_sexo']
-      .setValue(this.biologicalSex[0].id);
+   
 
     this.representanteForm = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.maxLength(255)]],
@@ -125,6 +145,7 @@ export class CreateFormComponent {
   get personalRifType(){return this.personalForm.get('rif_tipo')}
   get personalType(){return this.personalForm.get('id_tipo_personal')}
   get academicDegree(){return this.personalForm.get('id_grado_academico')}
+  get personalTurno(){return this.personalForm.get('id_turno')}
   
   get alumnoName() { return this.alumnoForm.get('nombre') }
   get alumnoLastName() { return this.alumnoForm.get('apellido') }
@@ -135,6 +156,10 @@ export class CreateFormComponent {
   get alumnoParentCedula(){return this.alumnoForm.get('parent_cedula')}
   get alumnoParentCedulaType(){return this.alumnoForm.get('parent_cedula_tipo')}
   get alumnoBiologicalSex(){return this.alumnoForm.get('id_sexo')} 
+  get alumnoTurno(){return this.alumnoForm.get('id_turno')} 
+  get alumnoSeccion(){return this.alumnoForm.get('id_seccion')} 
+  get alumnoGradoEscolar(){return this.alumnoForm.get('id_grado_escolar')} 
+  
 
   get representanteName() { return this.representanteForm.get('nombre') }
   get representanteLastName() { return this.representanteForm.get('apellido') }
@@ -163,7 +188,8 @@ export class CreateFormComponent {
         rif: this.personalRif.value,
         rif_tipo: this.personalRifType.value,
         id_tipo_personal: this.personalType.value,
-        id_grado_academico: this.academicDegree.value
+        id_grado_academico: this.academicDegree.value,
+        id_turno:this.personalTurno.value
       }
       // POST PERSONAL
       this.Personal.post(personal)
@@ -211,7 +237,10 @@ export class CreateFormComponent {
         cedula_tipo: this.alumnoCedulaType.value,
         parent_cedula: this.alumnoParentCedula.value,
         parent_cedula_tipo: this.alumnoParentCedulaType.value,
-        id_sexo:this.alumnoBiologicalSex.value
+        id_sexo:this.alumnoBiologicalSex.value,
+        id_turno:this.alumnoTurno.value,
+        id_seccion:this.alumnoSeccion.value,
+        id_grado_escolar:this.alumnoGradoEscolar.value
       }
       // POST ALUMNO
       this.Alumno.post(alumno)

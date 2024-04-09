@@ -142,20 +142,42 @@
             <!-- ADRESS INPUT -->
             <input formControlName="direccion" type="text" name="direccion" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 block w-full rounded-md sm:text-sm focus:ring-1">
             <!-- ACADEMIC GRADE INPUT -->
-            <label for="id_grado_academico">Grado academico:</label>
+            <label for="id_grado_academico">
+                <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                    Grado academico:
+                </span>
+            </label>
             <div>
                 <select formControlName="id_grado_academico" name="id_grado_academico" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 block w-full rounded-md sm:text-sm focus:ring-1">
                     @for (item of academicDegrees; track academicDegrees) {
-                        <option [ngValue]="item.id">{{item.name}}</option>
+                        <option [ngValue]="item.id">{{item.nombre}}</option>
                     }
                 </select>
             </div>
                <!-- PERSONAL TYPE INPUT -->
-            <label for="id_tipo_personal">Tipo de personal:</label>
+               <label for="id_tipo_personal">
+                <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                    Tipo de personal:
+                </span>
+            </label>
             <div>
                 <select formControlName="id_tipo_personal" name="id_tipo_personal" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 block w-full rounded-md sm:text-sm focus:ring-1">
                     @for (item of personalTypes; track personalTypes) {
-                        <option [ngValue]="item.id">{{item.name}}</option>
+                        <option [ngValue]="item.id">{{item.nombre}}</option>
+                    }
+                </select> 
+            </div>
+            <!-- TURNO LABEL -->
+            <label for="id_turno">
+                <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                    Turno:
+                </span>
+            </label> 
+                   <!--TURNO INPUT  -->
+            <div>
+                <select formControlName="id_turno" name="id_turno" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 block w-full rounded-md sm:text-sm focus:ring-1">
+                    @for (item of turnoList; track turnoList) {
+                        <option [ngValue]="item.id">{{item.nombre}}</option>
                     }
                 </select> 
             </div>
@@ -304,6 +326,52 @@
                     <option [ngValue]="item.id">{{item.name}}</option>
                 }
             </select>
+
+             <!-- TURNO LABEL -->
+             <label for="id_turno">
+                <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                    Turno:
+                </span>
+            </label> 
+                   <!--TURNO INPUT  -->
+            <div>
+                <select formControlName="id_turno" name="id_turno" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 block w-full rounded-md sm:text-sm focus:ring-1">
+                    @for (item of turnoList; track turnoList) {
+                        <option [ngValue]="item.id">{{item.nombre}}</option>
+                    }
+                </select> 
+            </div>
+
+             <!-- SECCION LABEL -->
+             <label for="id_seccion">
+                <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                    Seccion:
+                </span>
+            </label> 
+                   <!--Seccion INPUT  -->
+            <div>
+                <select formControlName="id_seccion" name="id_seccion" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 block w-full rounded-md sm:text-sm focus:ring-1">
+                    @for (item of seccionList; track seccionList) {
+                        <option [ngValue]="item.id">{{item.nombre}}</option>
+                    }
+                </select> 
+            </div>
+
+            <!-- GRADO ESCOLAR LABEL -->
+            <label for="id_grado_escolar">
+                <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                    Grado escolar:
+                </span>
+            </label> 
+                   <!--GRADO ESCOLAR INPUT  -->
+            <div>
+                <select formControlName="id_grado_escolar" name="id_grado_escolar" class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 block w-full rounded-md sm:text-sm focus:ring-1">
+                    @for (item of gradoEscolarList; track gradoEscolarList) {
+                        <option [ngValue]="item.id">{{item.nombre}}</option>
+                    }
+                </select> 
+            </div>
+            
             @if(!loding){
                 <!-- SUBMIT BUTTON -->
                 <button class="disabled:bg-slate-400 disabled:opacity-75 disabled:hover:bg-slate-400 bg-teal-700 hover:bg-teal-800 my-4 py-2 rounded-full text-white font-semibold text-xl" type="submit" [disabled]="alumnoForm.invalid ">Crear</button>
@@ -436,6 +504,8 @@
                 <!-- CEDULA INPUT -->
                 <input type="number" inputmode="numeric" formControlName="cedula" type="text" name="cedula" class="basis-full border rounded-r-md mt-1 px-3 py-2 shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-teal-600 focus:ring-teal-600 focus:ring-1">
             </div>
+
+
 
             
             @if(!loding){
